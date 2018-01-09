@@ -1,25 +1,5 @@
-//
-// Created by 梁天 on 2018/1/9.
-// Copyright (c) 2018 com.lator. All rights reserved.
-//
-
 import UIKit
 import WebKit
-
-protocol SKYWebViewNavigationDelegate : NSCopying,WKNavigationDelegate {
-    /// 导航时需要appOpenScheme的PrefixSet
-    var navigationPrefixes : Set<String> {get}
-    /// webView开始加载回调
-    var webViewDidStartProvisionalNavigationCallBack : (()->Void)? {get}
-    /// webView加载失败回调
-    var webViewDidFailNavigationCallBack : (()->Void)? {get}
-    /// webView加载成功回调
-    var webViewDidFinishNavigationCallBack : (()->Void)? {get}
-    /// 绑定的代理vc
-    weak var bindViewController : UIViewController? {get set}
-    /// 绑定的代理webView
-    weak var bindWebView : SKYWebView? {get set}
-}
 
 class SKYWebViewNavigationDelegateImpl : NSObject,SKYWebViewNavigationDelegate {
 
@@ -31,11 +11,12 @@ class SKYWebViewNavigationDelegateImpl : NSObject,SKYWebViewNavigationDelegate {
     weak var bindViewController: UIViewController?
     weak var bindWebView: SKYWebView?
 
+    required override init() {super.init()}
 }
 
-extension SKYWebViewNavigationDelegateImpl : NSCopying {
-    func copy(with zone: NSZone? = nil) -> Any {
-        let newImpl = SKYWebViewNavigationDelegateImpl()
+extension SKYWebViewNavigationDelegateImpl : Copyable {
+    func copy() -> Self {
+        let newImpl = type(of: self).init()
         newImpl.bindWebView = self.bindWebView
         newImpl.bindViewController = self.bindViewController
         newImpl.navigationPrefixes = self.navigationPrefixes
@@ -74,18 +55,18 @@ extension SKYWebViewNavigationDelegateImpl :WKNavigationDelegate {
 
         let isHandled = decideNavigationActionPolicy(WithURL: url)
 
-        if isHandled {
+        guard !isHandled else {
             decisionHandler(isHandled ? .cancel:.allow)
             return
         }
 
-        if navigationAction.targetFrame != nil {
+        guard navigationAction.targetFrame == nil else {
             decisionHandler(.allow)
             return
         }
 
         decisionHandler(.cancel)
-        guard let bindViewController = bindViewController {return}
+        guard let bindViewController = bindViewController else {return}
         let webVC = SKYWebViewController()
         ///TODO:webvc load rq
         if let naviVC = bindViewController.navigationController {

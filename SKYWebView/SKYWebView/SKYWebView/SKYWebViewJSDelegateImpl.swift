@@ -1,19 +1,6 @@
 import UIKit
 import WebKit
 
-protocol SKYWebViewJSDelegate : NSCopying,WKScriptMessageHandler {
-
-    /// 注入的userScript集合
-    var injectScriptNames : Set<String> {get}
-    /// 注入的scriptMsgHandlerNames集合，是内部handleBlock字典的keys
-    var userScripts : Set<WKUserScript> {get}
-    /// 绑定的代理vc
-    weak var bindViewController : UIViewController? {get set}
-    /// 绑定的代理webView
-    weak var bindWebView : SKYWebView? {get set}
-
-}
-
 class SKYWebViewJSDelegateImpl : NSObject,SKYWebViewJSDelegate {
     /// HBWebView的JS代理具体实现
     typealias SKYWebViewScriptHandleCallBack = (Any)->Void
@@ -63,11 +50,12 @@ class SKYWebViewJSDelegateImpl : NSObject,SKYWebViewJSDelegate {
         userContentController.removeAllUserScripts()
     }
 
+    required override init() {super.init()}
 }
 
-extension SKYWebViewJSDelegateImpl : NSCopying {
-    func copy(with zone: NSZone? = nil) -> Any {
-        let newImpl = SKYWebViewJSDelegateImpl()
+extension SKYWebViewJSDelegateImpl : Copyable {
+    func copy() -> Self {
+        let newImpl = type(of: self).init()
         newImpl.bindWebView = self.bindWebView
         newImpl.bindViewController = self.bindViewController
         newImpl.userScripts = self.userScripts
