@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  SKYWebView
-//
-//  Created by 梁天 on 2018/1/9.
-//  Copyright © 2018 com.lator. All rights reserved.
-//
-
 import UIKit
 
 

@@ -9,11 +9,18 @@
 /* Begin PBXBuildFile section */
 		4F62703A1271AB80196FEB3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F627E7F6EF9384E7CC91721 /* LaunchScreen.storyboard */; };
 		4F6274C9EFC0B8AE4444C61A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6274019BE0B95191AE942C /* AppDelegate.swift */; };
+		4F6274FA22C1C49803471D03 /* SKYWebViewJSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F627AD54F89E6D125A26A94 /* SKYWebViewJSDelegate.swift */; };
 		4F62761048FF6ADB7582408B /* SKYWebViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F627BC7E53146228C606F18 /* SKYWebViewUITests.swift */; };
 		4F6277482B395067D24D6EEB /* SKYWebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F62756101BFAAC68888CEEC /* SKYWebViewTests.swift */; };
 		4F62783853CA14A68ED97483 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6278B7EA59A06E817F7B3A /* ViewController.swift */; };
+		4F6278678FC0D056ACA7C642 /* SKYWebViewNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F627DFF3D73AE3183FF6179 /* SKYWebViewNavigationDelegate.swift */; };
+		4F627AEFA032133D92725A79 /* SKYWebViewControllerUIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F627BACF21D6450AE360328 /* SKYWebViewControllerUIConfig.swift */; };
+		4F627B0AB016127760E81360 /* SKYWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F627B5389D363B927C9FC66 /* SKYWebView.swift */; };
+		4F627BF902A291A242B3B5FE /* SKYWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F62754C8BADED02E0413083 /* SKYWebViewController.swift */; };
+		4F627C8C530A06CA3AB7FFDB /* SKYWebViewConfigTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F627D677F52CDA5EA71CBA0 /* SKYWebViewConfigTemplate.swift */; };
 		4F627D09D6E238DBC9AC4D85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F627DCDD39D67B110B601F9 /* Assets.xcassets */; };
 		4F627D405359D5C2F556F517 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F627FBCDC536F83BD42FB15 /* Main.storyboard */; };
+		847C4F472004A8320023468E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847C4F462004A8320023468E /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,16 +44,23 @@
 		4F6274019BE0B95191AE942C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F62744045B540BD9F7AE86A /* SKYWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKYWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F6274C306AA34C43D7D386E /* SKYWebViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SKYWebViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F62754C8BADED02E0413083 /* SKYWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKYWebViewController.swift; sourceTree = "<group>"; };
 		4F62756101BFAAC68888CEEC /* SKYWebViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKYWebViewTests.swift; sourceTree = "<group>"; };
 		4F62758C263A3D7BBCDAFEC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		4F6277C64D27FB5B39CBFDEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F6278B7722819D6E7EB1E17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		4F6278B7EA59A06E817F7B3A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4F62794F4F55532F6C6A52B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		4F627AD54F89E6D125A26A94 /* SKYWebViewJSDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKYWebViewJSDelegate.swift; sourceTree = "<group>"; };
 		4F627AD67022F5739AE1825C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4F627B5389D363B927C9FC66 /* SKYWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKYWebView.swift; sourceTree = "<group>"; };
+		4F627BACF21D6450AE360328 /* SKYWebViewControllerUIConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKYWebViewControllerUIConfig.swift; sourceTree = "<group>"; };
 		4F627BC7E53146228C606F18 /* SKYWebViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKYWebViewUITests.swift; sourceTree = "<group>"; };
+		4F627D677F52CDA5EA71CBA0 /* SKYWebViewConfigTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKYWebViewConfigTemplate.swift; sourceTree = "<group>"; };
 		4F627D99B6C3558D5E2A7FD3 /* SKYWebViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SKYWebViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F627DCDD39D67B110B601F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4F627DFF3D73AE3183FF6179 /* SKYWebViewNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKYWebViewNavigationDelegate.swift; sourceTree = "<group>"; };
+		847C4F462004A8320023468E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847C4F472004A8320023468E /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,8 +96,9 @@
 				4F627DCDD39D67B110B601F9 /* Assets.xcassets */,
 				4F627E7F6EF9384E7CC91721 /* LaunchScreen.storyboard */,
 				4F6274019BE0B95191AE942C /* AppDelegate.swift */,
-				4F627FBCDC536F83BD42FB15 /* Main.storyboard */,
 				4F6278B7EA59A06E817F7B3A /* ViewController.swift */,
+				4F627FBCDC536F83BD42FB15 /* Main.storyboard */,
+				4F62745DF0DA91AEAD682604 /* SKYWebView */,
 			);
 			path = SKYWebView;
 			sourceTree = "<group>";
@@ -94,6 +110,19 @@
 				4F627BC7E53146228C606F18 /* SKYWebViewUITests.swift */,
 			);
 			path = SKYWebViewUITests;
+			sourceTree = "<group>";
+		};
+		4F62745DF0DA91AEAD682604 /* SKYWebView */ = {
+			isa = PBXGroup;
+			children = (
+				4F627B5389D363B927C9FC66 /* SKYWebView.swift */,
+				4F627D677F52CDA5EA71CBA0 /* SKYWebViewConfigTemplate.swift */,
+				4F62754C8BADED02E0413083 /* SKYWebViewController.swift */,
+				4F627BACF21D6450AE360328 /* SKYWebViewControllerUIConfig.swift */,
+				4F627AD54F89E6D125A26A94 /* SKYWebViewJSDelegate.swift */,
+				4F627DFF3D73AE3183FF6179 /* SKYWebViewNavigationDelegate.swift */,
+			);
+			path = SKYWebView;
 			sourceTree = "<group>";
 		};
 		4F627943AE1DB6455BA7354A /* Products */ = {
@@ -113,6 +142,7 @@
 				4F62705E998C9451F6B3C2FF /* SKYWebView */,
 				4F627C719AA9233FD2A5AC12 /* SKYWebViewTests */,
 				4F627283DF7F8B40284381D2 /* SKYWebViewUITests */,
+				847C4F452004A8320023468E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +153,14 @@
 				4F62756101BFAAC68888CEEC /* SKYWebViewTests.swift */,
 			);
 			path = SKYWebViewTests;
+			sourceTree = "<group>";
+		};
+		847C4F452004A8320023468E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				847C4F462004A8320023468E /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +280,12 @@
 			files = (
 				4F6274C9EFC0B8AE4444C61A /* AppDelegate.swift in Sources */,
 				4F62783853CA14A68ED97483 /* ViewController.swift in Sources */,
+				4F627B0AB016127760E81360 /* SKYWebView.swift in Sources */,
+				4F627C8C530A06CA3AB7FFDB /* SKYWebViewConfigTemplate.swift in Sources */,
+				4F627BF902A291A242B3B5FE /* SKYWebViewController.swift in Sources */,
+				4F627AEFA032133D92725A79 /* SKYWebViewControllerUIConfig.swift in Sources */,
+				4F6274FA22C1C49803471D03 /* SKYWebViewJSDelegate.swift in Sources */,
+				4F6278678FC0D056ACA7C642 /* SKYWebViewNavigationDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +537,7 @@
 				4F627236D5ED30C3AF3CA474 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F62779BABDB5328F021EF63 /* Build configuration list for PBXNativeTarget "SKYWebViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +546,7 @@
 				4F627FE4FD561F949EEDA121 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F6277DFC1EE693FAEB49F86 /* Build configuration list for PBXNativeTarget "SKYWebViewTests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +555,7 @@
 				4F627BB7EE3854A6D2058FD5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F627904BC64C531EC492F83 /* Build configuration list for PBXProject "SKYWebView" */ = {
 			isa = XCConfigurationList;
