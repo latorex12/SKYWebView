@@ -29,7 +29,7 @@ class SKYWebViewJSDelegateImpl : NSObject,SKYWebViewJSDelegate {
 
     private var scriptHandleDict : [String:SKYWebViewScriptHandleCallBack] = [:]
 
-    func addUserScripts(scripts: Set<WKUserScript>) {
+    final func addUserScripts(scripts: Set<WKUserScript>) {
         userScripts.formUnion(scripts)
 
         guard let userContentController = bindWebView?.configuration.userContentController else {return}
@@ -39,23 +39,23 @@ class SKYWebViewJSDelegateImpl : NSObject,SKYWebViewJSDelegate {
         }
     }
 
-    func addScriptName(name: String, handler:@escaping SKYWebViewScriptHandleCallBack) {
+    final func addScriptName(name: String, handler:@escaping SKYWebViewScriptHandleCallBack) {
         scriptHandleDict[name] = handler
 
         guard let userContentController = bindWebView?.configuration.userContentController else {return}
         
         userContentController.add(self, name: name)
     }
-    
-    func removeScriptHandler(forName name: String) {
+
+    final func removeScriptHandler(forName name: String) {
         scriptHandleDict[name] = nil
         
         guard let userContentController = bindWebView?.configuration.userContentController else {return}
         
         userContentController.removeScriptMessageHandler(forName: name)
     }
-    
-    func removeAllScripts() {
+
+    final func removeAllScripts() {
         scriptHandleDict.removeAll()
         
         guard let userContentController = bindWebView?.configuration.userContentController else {return}
@@ -77,7 +77,7 @@ extension SKYWebViewJSDelegateImpl : NSCopying {
 }
 
 extension SKYWebViewJSDelegateImpl : WKScriptMessageHandler {
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    final func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         let name = message.name
         let info = message.body
         

@@ -1,5 +1,6 @@
 import Foundation
 
+/// WebView配置模板
 struct SKYWebViewConfigTemplate {
 
     static var appName : String?
