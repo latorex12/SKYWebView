@@ -4,9 +4,9 @@ import Foundation
 struct SKYWebViewConfigTemplate {
 
     static var appName : String?
-    static let defaultRequestHeaders : [String:String] = [:]
-    static let jsDelegate : SKYWebViewJSDelegate = SKYWebViewJSDelegateImpl()
-    static let naviDelegate : SKYWebViewNavigationDelegate = SKYWebViewNavigationDelegateImpl()
-    static let uiConfig : SKYWebViewControllerUIConfig = SKYWebViewControllerUIConfig()
+    private(set) static var defaultRequestHeaders : [String:String] = [:]
+    private(set) static var jsDelegate : SKYWebViewJSDelegate = SKYWebViewJSDelegateImpl()
+    private(set) static var naviDelegate : SKYWebViewNavigationDelegate = SKYWebViewNavigationDelegateImpl()
+    private(set) static var uiConfig : SKYWebViewControllerUIConfig = SKYWebViewControllerUIConfig()
 
 }
