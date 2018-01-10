@@ -23,7 +23,7 @@ extension SKYWebViewControllerUIConfig : Copyable {
 
 class SKYWebViewController : UIViewController {
 
-    private(set) lazy var webView : SKYWebView = {
+    @objc private(set) lazy var webView : SKYWebView = {
         let webView = SKYWebView()
         webView.jsDelegate?.bindViewController = self
         webView.naviDelegate?.bindViewController = self
@@ -41,7 +41,7 @@ class SKYWebViewController : UIViewController {
         }
         return webView
     }()
-    private(set) lazy var processView : UIProgressView = {
+    private(set) lazy var progressView : UIProgressView = {
         let progressView = UIProgressView()
         progressView.progressTintColor = self.config.progressTintColor
         progressView.trackTintColor = self.config.trackTintColor
@@ -86,6 +86,11 @@ class SKYWebViewController : UIViewController {
         let item = UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(dismissVC))
         return item
     }()
+    private lazy var progressHUD : MBProgressHUD = {
+        let hud = MBProgressHUD(view: self.view)
+        self.view.addSubview(hud)
+        return hud
+    }()
     
     deinit {
         webView.removeScripts()
@@ -106,6 +111,18 @@ class SKYWebViewController : UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func loadRequestWithURL(url: URL) {
+        webView.loadRequest(withURL: url)
+    }
+    
+    @objc func reloadRequest() {
+        webView.reloadRequest()
+    }
+}
+
+
+/// Lift Cycle
+extension SKYWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -119,16 +136,20 @@ class SKYWebViewController : UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        processView.frame = CGRect(x: 0, y: navigationController?.navigationBar.frame.size.height ?? 0, width: view.frame.size.width, height: 3)
+        progressView.frame = CGRect(x: 0, y: navigationController?.navigationBar.frame.size.height ?? 0, width: view.frame.size.width, height: 3)
         webView.frame = view.frame
     }
-    
+}
+
+
+/// UI
+extension SKYWebViewController {
     func setupViews() {
         navigationItem.title = config.fixedTitle
         
         refreshControl.addTarget(self, action: #selector(reloadRequest), for: .valueChanged)
         
-        (navigationController?.navigationBar ?? view)?.addSubview(processView)
+        (navigationController?.navigationBar ?? view)?.addSubview(progressView)
         view.addSubview(webView)
         webView.scrollView.addSubview(refreshControl)
         
@@ -138,56 +159,122 @@ class SKYWebViewController : UIViewController {
     func setupCustomBarButtonItems() {
         self.navigationItem.leftBarButtonItems = webView.canGoBack ? [backBarButtonItem,spaceBarButtonItem,closeBarButtonItem]:[backBarButtonItem]
     }
+    func startLoading() {
+        if config.showLoading {
+            progressHUD.show(animated: true)
+        }
+    }
     
-    func setupObserver() {
+    func endLoading() {
+        if config.showLoading {
+            progressHUD.hide(animated: true)
+        }
+    }
+    
+    func showHUDWithMessage(message: String) {
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud.removeFromSuperViewOnHide = true
+        hud.offset.y = -100
+        hud.mode = .text
+        hud.label.text = message
+        hud.show(animated: true)
+        hud.hide(animated: true, afterDelay: 1.5)
+    }
+}
+
+
+/// Actions
+extension SKYWebViewController {
+    @objc func goBack() {
+        if webView.canGoBack {
+            webView.goBack()
+        }
+        else {
+            dismissVC()
+        }
+    }
+    
+    @objc func dismissVC() {
+        progressView.removeFromSuperview()
         
+        if presentingViewController != nil {
+            dismiss(animated: true, completion: nil)
+        }
+        else if let navigationController = navigationController {
+            if navigationController.viewControllers.first!.isEqual(self) {
+                navigationController.dismiss(animated: true, completion: nil)
+            }
+            else {
+                navigationController.popViewController(animated: true)
+            }
+        }
+    }
+}
+
+
+/// Observer
+extension SKYWebViewController {
+    func setupObserver() {
+        webView.addObserver(self, forKeyPath: #keyPath(webView.title), options: [NSKeyValueObservingOptions.new], context: nil)
+        webView.addObserver(self, forKeyPath: #keyPath(webView.estimatedProgress), options: [NSKeyValueObservingOptions.new], context: nil)
+        webView.addObserver(self, forKeyPath: #keyPath(webView.canGoBack), options: [NSKeyValueObservingOptions.new], context: nil)
     }
     
     func removeObserver() {
-        
+        webView.removeObserver(self, forKeyPath: #keyPath(webView.title))
+        webView.removeObserver(self, forKeyPath: #keyPath(webView.estimatedProgress))
+        webView.removeObserver(self, forKeyPath: #keyPath(webView.canGoBack))
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-    }
-    
-    @objc func goBack() {
-        
-    }
-    
-    @objc func dismissVC() {
-        
-    }
-    
-    func loadRequestWithURL(url: URL) {
-        webView.loadRequest(withURL: url)
-    }
-    
-    @objc func reloadRequest() {
-        webView.reloadRequest()
-    }
-    
-    func startLoading() {
-        
-    }
-    
-    func endLoading() {
-        
+        switch keyPath! {
+        case #keyPath(webView.title):
+            guard config.fixedTitle != nil,
+                let newTitle = change![.newKey] as? String
+                else {return}
+            
+                navigationItem.title = newTitle
+            break
+        case #keyPath(webView.estimatedProgress):
+            let progress = change![.newKey] as! Float
+            progressView.progress = progress
+            progressView.isHidden = progress == 1 ? true:false
+            break
+        case #keyPath(webView.canGoBack):
+            setupCustomBarButtonItems()
+            break
+        default:
+            break
+        }
     }
 }
+
 
 /// Navigation Delegate
 extension SKYWebViewController {
-    
     func webViewDidStartProvisionalNavigation() {
-
+        startLoading()
+        
+        if config.fixedTitle == nil {
+            self.navigationItem.title = "加载中..."
+        }
     }
 
     func webViewDidFailNavigation() {
-
+        refreshControl.endRefreshing()
+        self.endLoading()
+        showHUDWithMessage(message: "加载失败")
     }
 
     func webViewDidFinishNavigation() {
-
+        view.setNeedsDisplay()
+        refreshControl.endRefreshing()
+        self.endLoading()
+        
+        if config.fixedTitle == nil {
+            navigationItem.title = webView.title
+        }
     }
 }
+

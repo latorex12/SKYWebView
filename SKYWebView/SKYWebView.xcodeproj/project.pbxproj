@@ -20,6 +20,7 @@
 		4F627C8C530A06CA3AB7FFDB /* SKYWebViewConfigTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F627D677F52CDA5EA71CBA0 /* SKYWebViewConfigTemplate.swift */; };
 		4F627D09D6E238DBC9AC4D85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F627DCDD39D67B110B601F9 /* Assets.xcassets */; };
 		4F627D405359D5C2F556F517 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F627FBCDC536F83BD42FB15 /* Main.storyboard */; };
+		5BC5A2049A5B8141B7486109 /* libPods-SKYWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A69C57D343116CE9B703858F /* libPods-SKYWebView.a */; };
 		847C4F472004A8320023468E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847C4F462004A8320023468E /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03DC109B6074D6E0C98D4405 /* Pods-SKYWebView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKYWebView.release.xcconfig"; path = "Pods/Target Support Files/Pods-SKYWebView/Pods-SKYWebView.release.xcconfig"; sourceTree = "<group>"; };
 		23D0D6922005142F00FA5195 /* SKYWebViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKYWebViewProtocols.swift; sourceTree = "<group>"; };
+		23D0D69620064B5100FA5195 /* SKYWebView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SKYWebView-Bridging-Header.h"; sourceTree = "<group>"; };
 		4F6274019BE0B95191AE942C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F62744045B540BD9F7AE86A /* SKYWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKYWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F6274C306AA34C43D7D386E /* SKYWebViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SKYWebViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +64,8 @@
 		4F627DCDD39D67B110B601F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F627DFF3D73AE3183FF6179 /* SKYWebViewNavigationDelegateImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKYWebViewNavigationDelegateImpl.swift; sourceTree = "<group>"; };
 		847C4F462004A8320023468E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A69C57D343116CE9B703858F /* libPods-SKYWebView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SKYWebView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E17C7BE504224C0E131C6126 /* Pods-SKYWebView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKYWebView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SKYWebView/Pods-SKYWebView.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				847C4F472004A8320023468E /* WebKit.framework in Frameworks */,
+				5BC5A2049A5B8141B7486109 /* libPods-SKYWebView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +95,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		392220CA77B81B7D4B540AE0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E17C7BE504224C0E131C6126 /* Pods-SKYWebView.debug.xcconfig */,
+				03DC109B6074D6E0C98D4405 /* Pods-SKYWebView.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		4F62705E998C9451F6B3C2FF /* SKYWebView */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +114,7 @@
 				4F6274019BE0B95191AE942C /* AppDelegate.swift */,
 				4F6278B7EA59A06E817F7B3A /* ViewController.swift */,
 				4F627FBCDC536F83BD42FB15 /* Main.storyboard */,
+				23D0D69620064B5100FA5195 /* SKYWebView-Bridging-Header.h */,
 			);
 			path = SKYWebView;
 			sourceTree = "<group>";
@@ -143,6 +159,7 @@
 				4F627C719AA9233FD2A5AC12 /* SKYWebViewTests */,
 				4F627283DF7F8B40284381D2 /* SKYWebViewUITests */,
 				847C4F452004A8320023468E /* Frameworks */,
+				392220CA77B81B7D4B540AE0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				847C4F462004A8320023468E /* WebKit.framework */,
+				A69C57D343116CE9B703858F /* libPods-SKYWebView.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -206,9 +224,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4F627367E6F284A1BFDD31C8 /* Build configuration list for PBXNativeTarget "SKYWebView" */;
 			buildPhases = (
+				499DDFB5180F9A345F906A7B /* [CP] Check Pods Manifest.lock */,
 				4F627BAF4D30985CCA8ADDE3 /* Sources */,
 				4F62782A16E612ADA62448AC /* Frameworks */,
 				4F627B78354DD5E1FAE09601 /* Resources */,
+				462149C06C71CB020085019D /* [CP] Embed Pods Frameworks */,
+				1678F9371EA164F48195F866 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -229,6 +250,7 @@
 				TargetAttributes = {
 					4F627F8119E780DC7998F03B = {
 						DevelopmentTeam = GF72L9K2ER;
+						LastSwiftMigration = 0920;
 					};
 				};
 			};
@@ -277,6 +299,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1678F9371EA164F48195F866 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SKYWebView/Pods-SKYWebView-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		462149C06C71CB020085019D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SKYWebView/Pods-SKYWebView-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		499DDFB5180F9A345F906A7B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4F627BAF4D30985CCA8ADDE3 /* Sources */ = {
@@ -347,13 +417,16 @@
 /* Begin XCBuildConfiguration section */
 		4F627236D5ED30C3AF3CA474 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03DC109B6074D6E0C98D4405 /* Pods-SKYWebView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = GF72L9K2ER;
 				INFOPLIST_FILE = SKYWebView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lator.SKYWebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SKYWebView/SKYWebView-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -522,13 +595,17 @@
 		};
 		4F627FEEE3ACED0D2FAD5628 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E17C7BE504224C0E131C6126 /* Pods-SKYWebView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = GF72L9K2ER;
 				INFOPLIST_FILE = SKYWebView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lator.SKYWebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SKYWebView/SKYWebView-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
