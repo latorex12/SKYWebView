@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 
-struct SKYWebViewControllerUIConfig : SKYWebViewControllerUIConfigDelegate {
+final class SKYWebViewControllerUIConfig : SKYWebViewControllerUIConfigDelegate {
     var showLoading: Bool = false
     var showProgress: Bool = true
     var fixedTitle: String?
@@ -12,15 +12,24 @@ struct SKYWebViewControllerUIConfig : SKYWebViewControllerUIConfigDelegate {
     var trackTintColor: UIColor?
 }
 
+
+//MARK: Copyable
 extension SKYWebViewControllerUIConfig : Copyable {
     func copy() -> SKYWebViewControllerUIConfig {
-        var newConfig = self
+        let newConfig = SKYWebViewControllerUIConfig()
+        newConfig.showLoading = self.showLoading
+        newConfig.showProgress = self.showProgress
+        newConfig.fixedTitle = self.fixedTitle
+        newConfig.backBarButtonImage = self.backBarButtonImage
         newConfig.backBarButtonCustomView = self.backBarButtonCustomView?.copy()
+        newConfig.closeBarButtonImage = self.closeBarButtonImage
+        newConfig.progressTintColor = self.progressTintColor
+        newConfig.trackTintColor = self.trackTintColor
         return newConfig
     }
 }
 
-
+//MARK:-
 class SKYWebViewController : UIViewController {
 
     @objc private(set) lazy var webView : SKYWebView = {
@@ -80,10 +89,23 @@ class SKYWebViewController : UIViewController {
     }()
     private lazy var spaceBarButtonItem : UIBarButtonItem = {
         let item = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        item.width = 12
         return item
     }()
     private lazy var closeBarButtonItem : UIBarButtonItem = {
-        let item = UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(dismissVC))
+        let button = UIButton(type: .custom)
+        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        if let closeButtonImg = self.config.closeBarButtonImage {
+            button.setImage(closeButtonImg, for: .normal)
+        }
+        else {
+            button.setTitle("关闭", for: .normal)
+            button.setTitleColor(.black, for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+            button.titleLabel?.textAlignment = .right
+        }
+        button.sizeToFit()
+        let item = UIBarButtonItem(customView: button)
         return item
     }()
     private lazy var progressHUD : MBProgressHUD = {
@@ -120,8 +142,7 @@ class SKYWebViewController : UIViewController {
     }
 }
 
-
-/// Lift Cycle
+//MARK:-Lift Cycle
 extension SKYWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,7 +163,7 @@ extension SKYWebViewController {
 }
 
 
-/// UI
+//MARK:- UI
 extension SKYWebViewController {
     func setupViews() {
         navigationItem.title = config.fixedTitle
@@ -183,7 +204,7 @@ extension SKYWebViewController {
 }
 
 
-/// Actions
+//MARK:- Actions
 extension SKYWebViewController {
     @objc func goBack() {
         if webView.canGoBack {
@@ -212,7 +233,7 @@ extension SKYWebViewController {
 }
 
 
-/// Observer
+//MARK:- Observer
 extension SKYWebViewController {
     func setupObserver() {
         self.addObserver(self, forKeyPath: #keyPath(webView.title), options: [.new], context: nil)
@@ -251,7 +272,7 @@ extension SKYWebViewController {
 }
 
 
-/// Navigation Delegate
+//MARK:- Navigation Delegate
 extension SKYWebViewController {
     func webViewDidStartProvisionalNavigation() {
         startLoading()

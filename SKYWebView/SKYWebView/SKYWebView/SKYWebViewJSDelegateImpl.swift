@@ -53,6 +53,8 @@ class SKYWebViewJSDelegateImpl : NSObject,SKYWebViewJSDelegate {
     required override init() {super.init()}
 }
 
+
+//MARK:- Copyable
 extension SKYWebViewJSDelegateImpl : Copyable {
     func copy() -> Self {
         let newImpl = type(of: self).init()
@@ -64,6 +66,8 @@ extension SKYWebViewJSDelegateImpl : Copyable {
     }
 }
 
+
+//MARK:- WKScriptMessageHandler
 extension SKYWebViewJSDelegateImpl : WKScriptMessageHandler {
     final func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         let name = message.name

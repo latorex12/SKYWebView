@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SKYWebViewConfigTemplate.appName = "TestDemo"
         SKYWebViewConfigTemplate.defaultRequestHeaders["defaultRequestHeaderKey"] = "defaultRequestHeaderValue"
         SKYWebViewConfigTemplate.naviDelegate.navigationPrefixes.insert("prefixTest")
-        var uiConfig = SKYWebViewConfigTemplate.uiConfig;
+        let uiConfig = SKYWebViewConfigTemplate.uiConfig;
         uiConfig.fixedTitle = "FixedTitle"
         uiConfig.backBarButtonImage = #imageLiteral(resourceName: "back")
         uiConfig.closeBarButtonImage = #imageLiteral(resourceName: "close")

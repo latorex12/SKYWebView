@@ -14,6 +14,8 @@ class SKYWebViewNavigationDelegateImpl : NSObject,SKYWebViewNavigationDelegate {
     required override init() {super.init()}
 }
 
+
+//MARK:- Copyable
 extension SKYWebViewNavigationDelegateImpl : Copyable {
     func copy() -> Self {
         let newImpl = type(of: self).init()
@@ -28,7 +30,9 @@ extension SKYWebViewNavigationDelegateImpl : Copyable {
     }
 }
 
-extension SKYWebViewNavigationDelegateImpl :WKNavigationDelegate {
+
+//MARK:- WKNavigationDelegate
+extension SKYWebViewNavigationDelegateImpl : WKNavigationDelegate {
     final func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         if let webViewDidStartProvisionalNavigationCallBack = webViewDidStartProvisionalNavigationCallBack {
             webViewDidStartProvisionalNavigationCallBack()

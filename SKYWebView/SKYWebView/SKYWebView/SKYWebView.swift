@@ -90,7 +90,7 @@ class SKYWebView : WKWebView {
 }
 
 
-/// Setter
+//MARK:- Setter
 extension SKYWebView {
     func willSetJSDelegate(_ newValue: SKYWebViewJSDelegate?) {
         let userContentController = configuration.userContentController
@@ -120,7 +120,7 @@ extension SKYWebView {
 }
 
 
-/// Observe
+//MARK:- Observe
 extension SKYWebView {
     func setupObserver() {
         self.addObserver(self, forKeyPath: #keyPath(scrollView.contentSize), options: [.old], context: nil)
