@@ -9,7 +9,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+        
+        SKYWebViewConfigTemplate.appName = "TestDemo"
+        SKYWebViewConfigTemplate.defaultRequestHeaders["defaultRequestHeaderKey"] = "defaultRequestHeaderValue"
+        SKYWebViewConfigTemplate.naviDelegate.navigationPrefixes.insert("prefixTest")
+        var uiConfig = SKYWebViewConfigTemplate.uiConfig;
+        uiConfig.fixedTitle = "FixedTitle"
+        uiConfig.backBarButtonImage = #imageLiteral(resourceName: "back")
+        uiConfig.closeBarButtonImage = #imageLiteral(resourceName: "close")
+    
     return true
     }
 
