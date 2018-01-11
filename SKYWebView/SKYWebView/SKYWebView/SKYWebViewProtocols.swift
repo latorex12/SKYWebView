@@ -26,6 +26,10 @@ protocol SKYWebViewControllerUIConfigDelegate : Copyable {
     var backBarButtonCustomView : UIView? {get set}
     /// 关闭按钮图片，可空，默认为关闭文字
     var closeBarButtonImage : UIImage? {get set}
+    /// 自定义关闭按钮，设置此属性将忽略backBarButtonImage
+    var closeBarButtonCustomView : UIView? {get set}
+    /// 返回关闭按钮之间间距
+    var itemFixedSpace : CGFloat? {get set}
     /// 进度条颜色
     var progressTintColor : UIColor? {get set}
     /// 进度条背景色

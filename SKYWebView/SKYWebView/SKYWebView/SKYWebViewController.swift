@@ -8,6 +8,9 @@ final class SKYWebViewControllerUIConfig : SKYWebViewControllerUIConfigDelegate 
     var backBarButtonImage: UIImage?
     var backBarButtonCustomView: UIView?
     var closeBarButtonImage: UIImage?
+    var closeBarButtonCustomView: UIView?
+    /// iOS11实测，低于8无效
+    var itemFixedSpace: CGFloat?
     var progressTintColor: UIColor?
     var trackTintColor: UIColor?
 }
@@ -23,6 +26,8 @@ extension SKYWebViewControllerUIConfig : Copyable {
         newConfig.backBarButtonImage = self.backBarButtonImage
         newConfig.backBarButtonCustomView = self.backBarButtonCustomView?.copy()
         newConfig.closeBarButtonImage = self.closeBarButtonImage
+        newConfig.closeBarButtonCustomView = self.closeBarButtonCustomView?.copy()
+        newConfig.itemFixedSpace = self.itemFixedSpace
         newConfig.progressTintColor = self.progressTintColor
         newConfig.trackTintColor = self.trackTintColor
         return newConfig
@@ -89,24 +94,33 @@ class SKYWebViewController : UIViewController {
     }()
     private lazy var spaceBarButtonItem : UIBarButtonItem = {
         let item = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        item.width = 12
+        item.width = config.itemFixedSpace ?? 0
         return item
     }()
     private lazy var closeBarButtonItem : UIBarButtonItem = {
-        let button = UIButton(type: .custom)
-        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        if let closeButtonImg = self.config.closeBarButtonImage {
-            button.setImage(closeButtonImg, for: .normal)
+        if let customView = self.config.closeBarButtonCustomView {
+            let item = UIBarButtonItem(customView: customView)
+            ///TODO:selector
+            let tap = UITapGestureRecognizer(target: self, action: #selector(dismissVC))
+            customView.addGestureRecognizer(tap)
+            return item
         }
         else {
-            button.setTitle("关闭", for: .normal)
-            button.setTitleColor(.black, for: .normal)
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-            button.titleLabel?.textAlignment = .right
+            let button = UIButton(type: .custom)
+            button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+            if let closeButtonImg = self.config.closeBarButtonImage {
+                button.setImage(closeButtonImg, for: .normal)
+            }
+            else {
+                button.setTitle("关闭", for: .normal)
+                button.setTitleColor(.black, for: .normal)
+                button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+                button.titleLabel?.textAlignment = .right
+            }
+            button.sizeToFit()
+            let item = UIBarButtonItem(customView: button)
+            return item
         }
-        button.sizeToFit()
-        let item = UIBarButtonItem(customView: button)
-        return item
     }()
     private lazy var progressHUD : MBProgressHUD = {
         let hud = MBProgressHUD(view: self.view)
