@@ -10,12 +10,12 @@ class SKYWebView : WKWebView {
     var httpRequestHeaders : [String:String]?
     var jsDelegate : SKYWebViewJSDelegate? {
         willSet {
-            setJSDelegate(newValue)
+            willSetJSDelegate(newValue)
         }
     }
     var naviDelegate : SKYWebViewNavigationDelegate? {
         willSet {
-            setNaviDelegate(newValue)
+            willSetNaviDelegate(newValue)
         }
     }
 
@@ -38,8 +38,10 @@ class SKYWebView : WKWebView {
         
         self.setupObserver()
         /// 属性观察方法在init中不调用，所以使用setter方法
-        self.setJSDelegate(jsDelegate)
-        self.setNaviDelegate(naviDelegate)
+        self.willSetJSDelegate(jsDelegate)
+        self.jsDelegate = jsDelegate
+        self.willSetNaviDelegate(naviDelegate)
+        self.naviDelegate = naviDelegate
     }
     
     convenience init() {
@@ -90,7 +92,7 @@ class SKYWebView : WKWebView {
 
 /// Setter
 extension SKYWebView {
-    func setJSDelegate(_ newValue: SKYWebViewJSDelegate?) {
+    func willSetJSDelegate(_ newValue: SKYWebViewJSDelegate?) {
         let userContentController = configuration.userContentController
         
         userContentController.removeAllUserScripts()
@@ -111,7 +113,7 @@ extension SKYWebView {
         }
     }
     
-    func setNaviDelegate(_ newValue: SKYWebViewNavigationDelegate?) {
+    func willSetNaviDelegate(_ newValue: SKYWebViewNavigationDelegate?) {
         navigationDelegate = newValue
         newValue?.bindWebView = self
     }

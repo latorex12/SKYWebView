@@ -15,7 +15,8 @@ class ViewController: UIViewController {
         let naviVC = UINavigationController(rootViewController: webVC)
         present(naviVC, animated: true, completion: nil)
         
-        webVC.loadRequestWithURL(url: URL.init(string: "http://www.baidu.com")!)
+        // test url with no scheme
+        webVC.loadRequestWithURL(url: URL.init(string: "www.baidu.com")!)
     }
 
 }
