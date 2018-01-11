@@ -47,7 +47,7 @@ protocol SKYWebViewJSDelegate : Copyable,WKScriptMessageHandler {
 
 protocol SKYWebViewNavigationDelegate : Copyable,WKNavigationDelegate {
     /// 导航时需要appOpenScheme的PrefixSet
-    var navigationPrefixes : Set<String> {get}
+    var navigationPrefixes : Set<String> {get set}
     /// webView开始加载回调
     var webViewDidStartProvisionalNavigationCallBack : (()->Void)? {get set}
     /// webView加载失败回调

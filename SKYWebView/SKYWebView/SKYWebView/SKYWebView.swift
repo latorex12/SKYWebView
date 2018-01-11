@@ -10,32 +10,12 @@ class SKYWebView : WKWebView {
     var httpRequestHeaders : [String:String]?
     var jsDelegate : SKYWebViewJSDelegate? {
         willSet {
-            let userContentController = configuration.userContentController
-            
-            userContentController.removeAllUserScripts()
-            if let jsDelegate = jsDelegate {
-                for name in jsDelegate.injectScriptNames {
-                    userContentController.removeScriptMessageHandler(forName: name)
-                }
-            }
-            
-            if let newValue = newValue {
-                newValue.bindWebView = self
-                for name in newValue.injectScriptNames {
-                    userContentController.add(newValue, name: name)
-                }
-                for scripts in newValue.userScripts {
-                    userContentController.addUserScript(scripts)
-                }
-            }
+            setJSDelegate(newValue)
         }
     }
     var naviDelegate : SKYWebViewNavigationDelegate? {
         willSet {
-            navigationDelegate = newValue
-            if let newValue = newValue {
-                newValue.bindWebView = self
-            }
+            setNaviDelegate(newValue)
         }
     }
 
@@ -56,8 +36,10 @@ class SKYWebView : WKWebView {
 
         super.init(frame: .zero, configuration: config)
         
-        self.jsDelegate = jsDelegate
-        self.naviDelegate = naviDelegate
+        self.setupObserver()
+        /// 属性观察方法在init中不调用，所以使用setter方法
+        self.setJSDelegate(jsDelegate)
+        self.setNaviDelegate(naviDelegate)
     }
     
     convenience init() {
@@ -74,6 +56,7 @@ class SKYWebView : WKWebView {
             let urlStringWithScheme = "http://" + tempURL.absoluteString
             tempURL = URL.init(string: urlStringWithScheme)!
         }
+        requestURL = tempURL
         timeoutInterval = interval > 0 ? interval:30
 
         var request = URLRequest(url: tempURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: timeoutInterval)
@@ -93,7 +76,8 @@ class SKYWebView : WKWebView {
     }
     
     func reloadRequest() {
-        loadRequest(withURL: requestURL!, timeoutInterval: timeoutInterval)
+        guard let requestURL = requestURL else {return}
+        loadRequest(withURL: requestURL, timeoutInterval: timeoutInterval)
     }
     
     func removeScripts() {
@@ -103,18 +87,49 @@ class SKYWebView : WKWebView {
     }
 }
 
+
+/// Setter
+extension SKYWebView {
+    func setJSDelegate(_ newValue: SKYWebViewJSDelegate?) {
+        let userContentController = configuration.userContentController
+        
+        userContentController.removeAllUserScripts()
+        if let oldValue = self.jsDelegate {
+            for name in oldValue.injectScriptNames {
+                userContentController.removeScriptMessageHandler(forName: name)
+            }
+        }
+        
+        if let newValue = newValue {
+            newValue.bindWebView = self
+            for name in newValue.injectScriptNames {
+                userContentController.add(newValue, name: name)
+            }
+            for scripts in newValue.userScripts {
+                userContentController.addUserScript(scripts)
+            }
+        }
+    }
+    
+    func setNaviDelegate(_ newValue: SKYWebViewNavigationDelegate?) {
+        navigationDelegate = newValue
+        newValue?.bindWebView = self
+    }
+}
+
+
 /// Observe
 extension SKYWebView {
     func setupObserver() {
-        scrollView.addObserver(self, forKeyPath: "contentSize", options: [.old], context: nil)
+        self.addObserver(self, forKeyPath: #keyPath(scrollView.contentSize), options: [.old], context: nil)
     }
 
     func removeObserver() {
-        scrollView.removeObserver(self, forKeyPath: "contentSize")
+        self.removeObserver(self, forKeyPath: #keyPath(scrollView.contentSize))
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "contentSize" {
+        if keyPath == #keyPath(scrollView.contentSize) {
             let oldSize = change![NSKeyValueChangeKey.oldKey] as! CGSize
             let newSize = self.scrollView.contentSize
             

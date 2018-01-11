@@ -3,7 +3,7 @@ import WebKit
 
 class SKYWebViewNavigationDelegateImpl : NSObject,SKYWebViewNavigationDelegate {
 
-    private(set) var navigationPrefixes: Set<String> = Set()
+    var navigationPrefixes: Set<String> = Set()
     var webViewDidStartProvisionalNavigationCallBack: (() -> Void)?
     var webViewDidFailNavigationCallBack: (() -> Void)?
     var webViewDidFinishNavigationCallBack: (() -> Void)?

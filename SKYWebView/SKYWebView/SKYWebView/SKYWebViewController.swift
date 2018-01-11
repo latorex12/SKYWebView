@@ -215,15 +215,15 @@ extension SKYWebViewController {
 /// Observer
 extension SKYWebViewController {
     func setupObserver() {
-        webView.addObserver(self, forKeyPath: #keyPath(webView.title), options: [NSKeyValueObservingOptions.new], context: nil)
-        webView.addObserver(self, forKeyPath: #keyPath(webView.estimatedProgress), options: [NSKeyValueObservingOptions.new], context: nil)
-        webView.addObserver(self, forKeyPath: #keyPath(webView.canGoBack), options: [NSKeyValueObservingOptions.new], context: nil)
+        self.addObserver(self, forKeyPath: #keyPath(webView.title), options: [.new], context: nil)
+        self.addObserver(self, forKeyPath: #keyPath(webView.estimatedProgress), options: [.new], context: nil)
+        self.addObserver(self, forKeyPath: #keyPath(webView.canGoBack), options: [.new], context: nil)
     }
     
     func removeObserver() {
-        webView.removeObserver(self, forKeyPath: #keyPath(webView.title))
-        webView.removeObserver(self, forKeyPath: #keyPath(webView.estimatedProgress))
-        webView.removeObserver(self, forKeyPath: #keyPath(webView.canGoBack))
+        self.removeObserver(self, forKeyPath: #keyPath(webView.title))
+        self.removeObserver(self, forKeyPath: #keyPath(webView.estimatedProgress))
+        self.removeObserver(self, forKeyPath: #keyPath(webView.canGoBack))
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
