@@ -5,23 +5,6 @@ class SKYWebView : WKWebView {
     typealias RequestWillLoadCallack = (inout URLRequest)->Void
     typealias ContentSizeChangedCallback = (CGSize)->Void
 
-    var requestWillLoadCallack : RequestWillLoadCallack?
-    var contentSizeChangedCallBack : ContentSizeChangedCallback?
-    var httpRequestHeaders : [String:String]?
-    var jsDelegate : SKYWebViewJSDelegate? {
-        willSet {
-            willSetJSDelegate(newValue)
-        }
-    }
-    var naviDelegate : SKYWebViewNavigationDelegate? {
-        willSet {
-            willSetNaviDelegate(newValue)
-        }
-    }
-
-    private(set) var requestURL: URL?
-    private(set) var timeoutInterval: TimeInterval = 30
-
     deinit {
         removeScripts()
         removeObserver()
@@ -87,6 +70,23 @@ class SKYWebView : WKWebView {
         jsDelegate.bindWebView = nil
         self.jsDelegate = nil
     }
+    
+    var requestWillLoadCallack : RequestWillLoadCallack?
+    var contentSizeChangedCallBack : ContentSizeChangedCallback?
+    var httpRequestHeaders : [String:String]?
+    var jsDelegate : SKYWebViewJSDelegate? {
+        willSet {
+            willSetJSDelegate(newValue)
+        }
+    }
+    var naviDelegate : SKYWebViewNavigationDelegate? {
+        willSet {
+            willSetNaviDelegate(newValue)
+        }
+    }
+    
+    private(set) var requestURL: URL?
+    private(set) var timeoutInterval: TimeInterval = 30
 }
 
 

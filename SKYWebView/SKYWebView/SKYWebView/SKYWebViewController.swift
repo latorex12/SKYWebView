@@ -36,7 +36,35 @@ extension SKYWebViewControllerUIConfig : Copyable {
 
 //MARK:-
 class SKYWebViewController : UIViewController {
+    
+    deinit {
+        webView.removeScripts()
+        removeObserver()
+    }
 
+    init(withConfig config: SKYWebViewControllerUIConfig?) {
+        super.init(nibName: nil, bundle: nil)
+        let config = config ?? SKYWebViewConfigTemplate.uiConfig.copy()
+        self.config = config
+        setupObserver()
+    }
+    
+    convenience init() {
+        self.init(withConfig: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func loadRequestWithURL(url: URL) {
+        webView.loadRequest(withURL: url)
+    }
+    
+    @objc func reloadRequest() {
+        webView.reloadRequest()
+    }
+    
     @objc private(set) lazy var webView : SKYWebView = {
         let webView = SKYWebView()
         webView.jsDelegate?.bindViewController = self
@@ -127,33 +155,6 @@ class SKYWebViewController : UIViewController {
         self.view.addSubview(hud)
         return hud
     }()
-    
-    deinit {
-        webView.removeScripts()
-        removeObserver()
-    }
-
-    init(withConfig config: SKYWebViewControllerUIConfig?) {
-        super.init(nibName: nil, bundle: nil)
-        let config = config ?? SKYWebViewConfigTemplate.uiConfig.copy()
-        self.config = config
-    }
-    
-    convenience init() {
-        self.init(withConfig: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func loadRequestWithURL(url: URL) {
-        webView.loadRequest(withURL: url)
-    }
-    
-    @objc func reloadRequest() {
-        webView.reloadRequest()
-    }
 }
 
 //MARK:-Lift Cycle
@@ -162,7 +163,6 @@ extension SKYWebViewController {
         super.viewDidLoad()
         
         setupViews()
-        setupObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
