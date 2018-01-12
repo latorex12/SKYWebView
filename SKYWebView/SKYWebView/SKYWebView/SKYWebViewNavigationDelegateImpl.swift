@@ -83,13 +83,15 @@ extension SKYWebViewNavigationDelegateImpl : WKNavigationDelegate {
 
     func decideNavigationActionPolicy(WithURL url: URL) -> Bool {
         let urlString = url.absoluteString
-        for prefix in navigationPrefixes {
-            guard urlString.hasPrefix(prefix) else {continue}
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
-            }
-            return true
+        
+        let containDefinedPrefix = navigationPrefixes.contains { (prefix) -> Bool in
+            return urlString.hasPrefix(prefix)
         }
-        return false
+        guard containDefinedPrefix else { return false }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+        return true
     }
 }

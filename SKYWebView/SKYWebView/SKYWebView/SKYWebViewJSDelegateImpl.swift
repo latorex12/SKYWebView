@@ -21,9 +21,9 @@ class SKYWebViewJSDelegateImpl : NSObject,SKYWebViewJSDelegate {
 
         guard let userContentController = bindWebView?.configuration.userContentController else {return}
         
-        for script in scripts {
+        scripts.forEach({ (script) in
             userContentController.addUserScript(script)
-        }
+        })
     }
 
     final func addScriptName(name: String, handler:@escaping SKYWebViewScriptHandleCallBack) {

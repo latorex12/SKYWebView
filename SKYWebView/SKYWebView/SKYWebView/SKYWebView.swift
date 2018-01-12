@@ -97,19 +97,19 @@ extension SKYWebView {
         
         userContentController.removeAllUserScripts()
         if let oldValue = self.jsDelegate {
-            for name in oldValue.injectScriptNames {
+            oldValue.injectScriptNames.forEach({ (name) in
                 userContentController.removeScriptMessageHandler(forName: name)
-            }
+            })
         }
         
         if let newValue = newValue {
             newValue.bindWebView = self
-            for name in newValue.injectScriptNames {
+            newValue.injectScriptNames.forEach({ (name) in
                 userContentController.add(newValue, name: name)
-            }
-            for scripts in newValue.userScripts {
-                userContentController.addUserScript(scripts)
-            }
+            })
+            newValue.userScripts.forEach({ (script) in
+                userContentController.addUserScript(script)
+            })
         }
     }
     
