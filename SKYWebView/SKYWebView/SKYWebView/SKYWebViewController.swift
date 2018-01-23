@@ -2,24 +2,24 @@ import UIKit
 import WebKit
 import MBProgressHUD
 
-final class SKYWebViewControllerUIConfig : SKYWebViewControllerUIConfigDelegate {
-    var showLoading: Bool = false
-    var showProgress: Bool = true
-    var fixedTitle: String?
-    var backBarButtonImage: UIImage?
-    var backBarButtonCustomView: UIView?
-    var closeBarButtonImage: UIImage?
-    var closeBarButtonCustomView: UIView?
+public final class SKYWebViewControllerUIConfig : SKYWebViewControllerUIConfigDelegate {
+    public var showLoading: Bool = false
+    public var showProgress: Bool = true
+    public var fixedTitle: String?
+    public var backBarButtonImage: UIImage?
+    public var backBarButtonCustomView: UIView?
+    public var closeBarButtonImage: UIImage?
+    public var closeBarButtonCustomView: UIView?
     /// iOS11实测，低于8无效
-    var itemFixedSpace: CGFloat?
-    var progressTintColor: UIColor?
-    var trackTintColor: UIColor?
+    public var itemFixedSpace: CGFloat?
+    public var progressTintColor: UIColor?
+    public var trackTintColor: UIColor?
 }
 
 
 //MARK: Copyable
 extension SKYWebViewControllerUIConfig : Copyable {
-    func copy() -> SKYWebViewControllerUIConfig {
+    public func copy() -> SKYWebViewControllerUIConfig {
         let newConfig = SKYWebViewControllerUIConfig()
         newConfig.showLoading = self.showLoading
         newConfig.showProgress = self.showProgress
@@ -43,14 +43,14 @@ open class SKYWebViewController : UIViewController {
         removeObserver()
     }
 
-    init(withConfig config: SKYWebViewControllerUIConfig?) {
+    public init(withConfig config: SKYWebViewControllerUIConfig?) {
         super.init(nibName: nil, bundle: nil)
         let config = config ?? SKYWebViewConfigTemplate.uiConfig.copy()
         self.config = config
         setupObserver()
     }
     
-    convenience init() {
+    public convenience init() {
         self.init(withConfig: nil)
     }
     
