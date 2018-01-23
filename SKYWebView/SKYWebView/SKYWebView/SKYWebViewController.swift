@@ -58,11 +58,11 @@ open class SKYWebViewController : UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func loadRequestWithURL(url: URL) {
+    open func loadRequestWithURL(url: URL) {
         webView.loadRequest(withURL: url)
     }
     
-    @objc func reloadRequest() {
+    @objc open func reloadRequest() {
         webView.reloadRequest()
     }
     
