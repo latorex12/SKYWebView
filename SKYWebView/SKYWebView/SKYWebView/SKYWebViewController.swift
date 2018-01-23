@@ -36,7 +36,7 @@ extension SKYWebViewControllerUIConfig : Copyable {
 }
 
 //MARK:-
-class SKYWebViewController : UIViewController {
+open class SKYWebViewController : UIViewController {
     
     deinit {
         webView.removeScripts()
@@ -54,7 +54,7 @@ class SKYWebViewController : UIViewController {
         self.init(withConfig: nil)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -160,18 +160,18 @@ class SKYWebViewController : UIViewController {
 
 //MARK:-Lift Cycle
 extension SKYWebViewController {
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         setupViews()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    override func viewDidLayoutSubviews() {
+    override open func viewDidLayoutSubviews() {
         progressView.frame = CGRect(x: 0, y: navigationController?.navigationBar.frame.size.height ?? 0, width: view.frame.size.width, height: 3)
         webView.frame = view.frame
     }
@@ -262,7 +262,7 @@ extension SKYWebViewController {
         self.removeObserver(self, forKeyPath: #keyPath(webView.canGoBack))
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         switch keyPath! {
         case #keyPath(webView.title):

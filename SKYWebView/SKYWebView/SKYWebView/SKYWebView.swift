@@ -1,16 +1,16 @@
 import Foundation
 import WebKit
 
-class SKYWebView : WKWebView {
-    typealias RequestWillLoadCallack = (inout URLRequest)->Void
-    typealias ContentSizeChangedCallback = (CGSize)->Void
+open class SKYWebView : WKWebView {
+    public typealias RequestWillLoadCallack = (inout URLRequest)->Void
+    public typealias ContentSizeChangedCallback = (CGSize)->Void
 
     deinit {
         removeScripts()
         removeObserver()
     }
     
-    init(withJSDelegate jsDelegate:SKYWebViewJSDelegate? = SKYWebViewConfigTemplate.jsDelegate.copy() ,andNaviDelegate naviDelegate:SKYWebViewNavigationDelegate? = SKYWebViewConfigTemplate.naviDelegate.copy()) {
+    public init(withJSDelegate jsDelegate: SKYWebViewJSDelegate?,andNaviDelegate naviDelegate:SKYWebViewNavigationDelegate?) {
         let config = WKWebViewConfiguration()
         if #available(iOS 9.0,*),
            let appName = SKYWebViewConfigTemplate.appName {
@@ -27,15 +27,15 @@ class SKYWebView : WKWebView {
         self.naviDelegate = naviDelegate
     }
     
-    convenience init() {
+    public convenience init() {
         self.init(withJSDelegate: SKYWebViewConfigTemplate.jsDelegate.copy(), andNaviDelegate: SKYWebViewConfigTemplate.naviDelegate.copy())
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func loadRequest(withURL url: URL, timeoutInterval interval: TimeInterval = 30) {
+    open func loadRequest(withURL url: URL, timeoutInterval interval: TimeInterval = 30) {
         var tempURL = url
         if tempURL.scheme == nil {
             let urlStringWithScheme = "http://" + tempURL.absoluteString
@@ -60,26 +60,26 @@ class SKYWebView : WKWebView {
         self.load(request)
     }
     
-    func reloadRequest() {
+    open func reloadRequest() {
         guard let requestURL = requestURL else {return}
         loadRequest(withURL: requestURL, timeoutInterval: timeoutInterval)
     }
     
-    func removeScripts() {
+    open func removeScripts() {
         guard let jsDelegate = jsDelegate else {return}
         jsDelegate.bindWebView = nil
         self.jsDelegate = nil
     }
     
-    var requestWillLoadCallack : RequestWillLoadCallack?
-    var contentSizeChangedCallBack : ContentSizeChangedCallback?
-    var httpRequestHeaders : [String:String]?
-    var jsDelegate : SKYWebViewJSDelegate? {
+    open var requestWillLoadCallack : RequestWillLoadCallack?
+    open var contentSizeChangedCallBack : ContentSizeChangedCallback?
+    open var httpRequestHeaders : [String:String]?
+    public var jsDelegate : SKYWebViewJSDelegate? {
         willSet {
             willSetJSDelegate(newValue)
         }
     }
-    var naviDelegate : SKYWebViewNavigationDelegate? {
+    public var naviDelegate : SKYWebViewNavigationDelegate? {
         willSet {
             willSetNaviDelegate(newValue)
         }
@@ -130,7 +130,7 @@ extension SKYWebView {
         self.removeObserver(self, forKeyPath: #keyPath(scrollView.contentSize))
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(scrollView.contentSize) {
             let oldSize = change![NSKeyValueChangeKey.oldKey] as! CGSize
             let newSize = self.scrollView.contentSize

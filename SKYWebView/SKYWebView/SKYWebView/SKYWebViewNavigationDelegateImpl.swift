@@ -1,23 +1,23 @@
 import UIKit
 import WebKit
 
-class SKYWebViewNavigationDelegateImpl : NSObject,SKYWebViewNavigationDelegate {
+open class SKYWebViewNavigationDelegateImpl : NSObject,SKYWebViewNavigationDelegate {
 
-    var navigationPrefixes: Set<String> = Set()
-    var webViewDidStartProvisionalNavigationCallBack: (() -> Void)?
-    var webViewDidFailNavigationCallBack: (() -> Void)?
-    var webViewDidFinishNavigationCallBack: (() -> Void)?
+    open var navigationPrefixes: Set<String> = Set()
+    open var webViewDidStartProvisionalNavigationCallBack: (() -> Void)?
+    open var webViewDidFailNavigationCallBack: (() -> Void)?
+    open var webViewDidFinishNavigationCallBack: (() -> Void)?
 
-    weak var bindViewController: UIViewController?
-    weak var bindWebView: SKYWebView?
+    open weak var bindViewController: UIViewController?
+    open weak var bindWebView: SKYWebView?
 
-    required override init() {super.init()}
+    required override public init() {super.init()}
 }
 
 
 //MARK:- Copyable
 extension SKYWebViewNavigationDelegateImpl : Copyable {
-    func copy() -> Self {
+    public func copy() -> Self {
         let newImpl = type(of: self).init()
         newImpl.bindWebView = self.bindWebView
         newImpl.bindViewController = self.bindViewController
@@ -33,25 +33,25 @@ extension SKYWebViewNavigationDelegateImpl : Copyable {
 
 //MARK:- WKNavigationDelegate
 extension SKYWebViewNavigationDelegateImpl : WKNavigationDelegate {
-    final func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    final public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         if let webViewDidStartProvisionalNavigationCallBack = webViewDidStartProvisionalNavigationCallBack {
             webViewDidStartProvisionalNavigationCallBack()
         }
     }
 
-    final func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    final public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         if let webViewDidFailNavigationCallBack = webViewDidFailNavigationCallBack {
             webViewDidFailNavigationCallBack()
         }
     }
 
-    final func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    final public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if let webViewDidFinishNavigationCallBack = webViewDidFinishNavigationCallBack {
             webViewDidFinishNavigationCallBack()
         }
     }
 
-    final func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    final public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard let url = navigationAction.request.url else {
             decisionHandler(.cancel)
             return
@@ -81,7 +81,7 @@ extension SKYWebViewNavigationDelegateImpl : WKNavigationDelegate {
         }
     }
 
-    func decideNavigationActionPolicy(WithURL url: URL) -> Bool {
+    open func decideNavigationActionPolicy(WithURL url: URL) -> Bool {
         let urlString = url.absoluteString
         
         let containDefinedPrefix = navigationPrefixes.contains { (prefix) -> Bool in

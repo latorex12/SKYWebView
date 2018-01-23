@@ -1,7 +1,7 @@
 import Foundation
 
 /// WebView配置模板
-struct SKYWebViewConfigTemplate {
+public struct SKYWebViewConfigTemplate {
 
     static var appName : String?
     static var defaultRequestHeaders : [String:String] = [:]

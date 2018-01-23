@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 
-protocol Copyable {
+public protocol Copyable {
     func copy() -> Self
 }
 
@@ -13,7 +13,7 @@ extension UIView {
     }
 }
 
-protocol SKYWebViewControllerUIConfigDelegate : Copyable {
+public protocol SKYWebViewControllerUIConfigDelegate : Copyable {
     /// 是否显示加载HUD
     var showLoading : Bool {get set}
     /// 是否显示进度条
@@ -36,7 +36,7 @@ protocol SKYWebViewControllerUIConfigDelegate : Copyable {
     var trackTintColor : UIColor? {get set}
 }
 
-protocol SKYWebViewJSDelegate : Copyable,WKScriptMessageHandler {
+public protocol SKYWebViewJSDelegate : Copyable,WKScriptMessageHandler {
     
     /// 注入的userScript集合
     var injectScriptNames : Set<String> {get}
@@ -49,7 +49,7 @@ protocol SKYWebViewJSDelegate : Copyable,WKScriptMessageHandler {
     
 }
 
-protocol SKYWebViewNavigationDelegate : Copyable,WKNavigationDelegate {
+public protocol SKYWebViewNavigationDelegate : Copyable,WKNavigationDelegate {
     /// 导航时需要appOpenScheme的PrefixSet
     var navigationPrefixes : Set<String> {get set}
     /// webView开始加载回调
