@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		23D0D6932005142F00FA5195 /* SKYWebViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D0D6922005142F00FA5195 /* SKYWebViewProtocols.swift */; };
+		403CC95905959C010530A0CB /* Pods_SKYWebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B162A5F91611C71766F9FA4 /* Pods_SKYWebView.framework */; };
 		4F62703A1271AB80196FEB3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F627E7F6EF9384E7CC91721 /* LaunchScreen.storyboard */; };
 		4F6274C9EFC0B8AE4444C61A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6274019BE0B95191AE942C /* AppDelegate.swift */; };
 		4F6274FA22C1C49803471D03 /* SKYWebViewJSDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F627AD54F89E6D125A26A94 /* SKYWebViewJSDelegateImpl.swift */; };
@@ -20,7 +21,6 @@
 		4F627C8C530A06CA3AB7FFDB /* SKYWebViewConfigTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F627D677F52CDA5EA71CBA0 /* SKYWebViewConfigTemplate.swift */; };
 		4F627D09D6E238DBC9AC4D85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F627DCDD39D67B110B601F9 /* Assets.xcassets */; };
 		4F627D405359D5C2F556F517 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F627FBCDC536F83BD42FB15 /* Main.storyboard */; };
-		5BC5A2049A5B8141B7486109 /* libPods-SKYWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A69C57D343116CE9B703858F /* libPods-SKYWebView.a */; };
 		847C4F472004A8320023468E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847C4F462004A8320023468E /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,7 +64,7 @@
 		4F627DCDD39D67B110B601F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F627DFF3D73AE3183FF6179 /* SKYWebViewNavigationDelegateImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKYWebViewNavigationDelegateImpl.swift; sourceTree = "<group>"; };
 		847C4F462004A8320023468E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		A69C57D343116CE9B703858F /* libPods-SKYWebView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SKYWebView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B162A5F91611C71766F9FA4 /* Pods_SKYWebView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKYWebView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E17C7BE504224C0E131C6126 /* Pods-SKYWebView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKYWebView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SKYWebView/Pods-SKYWebView.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,7 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				847C4F472004A8320023468E /* WebKit.framework in Frameworks */,
-				5BC5A2049A5B8141B7486109 /* libPods-SKYWebView.a in Frameworks */,
+				403CC95905959C010530A0CB /* Pods_SKYWebView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				847C4F462004A8320023468E /* WebKit.framework */,
-				A69C57D343116CE9B703858F /* libPods-SKYWebView.a */,
+				9B162A5F91611C71766F9FA4 /* Pods_SKYWebView.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

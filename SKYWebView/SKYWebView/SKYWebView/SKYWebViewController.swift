@@ -1,5 +1,6 @@
 import UIKit
 import WebKit
+import MBProgressHUD
 
 final class SKYWebViewControllerUIConfig : SKYWebViewControllerUIConfigDelegate {
     var showLoading: Bool = false
