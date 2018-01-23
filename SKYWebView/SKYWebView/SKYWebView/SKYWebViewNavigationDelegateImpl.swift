@@ -90,7 +90,7 @@ extension SKYWebViewNavigationDelegateImpl : WKNavigationDelegate {
         guard containDefinedPrefix else { return false }
         
         if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
+            UIApplication.shared.openURL(url)
         }
         return true
     }
